@@ -36,8 +36,15 @@ class NodeChart extends Component {
             this.setState({data: array})
         })
     }
-    render() {
+    componentDidMount(){
         this.getData()
+    }
+    componentDidUpdate(prevProps){
+        if(this.props !== prevProps) {
+            this.getData()
+        }
+    }
+    render() {
         return (
             <div class="row-chart"> 
                 <div class="label">
