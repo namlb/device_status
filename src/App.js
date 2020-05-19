@@ -12,7 +12,10 @@ class App extends Component{
     this.state = {
       nodes: [],
       class:"all",
-      date: new Date()
+      date: new Date(),
+      activeNumber: 0,
+      activeBeforeNumber: 0,
+      inactive: 0
     }
   }
 
@@ -43,16 +46,19 @@ class App extends Component{
           if(node.timeDelta === 0) {
             node.Status = "Active"
             node.Class = "active"
+            this.state.activeNumber++
           } else {
             if(node.timeDelta>24){
               node.timeDelta = (node.timeDelta - node.timeDelta%24)/24
               node.Status = "Active "+node.timeDelta+" days ago"
             } else node.Status = "Active "+node.timeDelta+" hours ago"
             node.Class = "active-before"
+            this.state.activeBeforeNumber++
           }
         } else {
           node.Status = "Inactive"
           node.Class = "inactive"
+          this.state.inactive++
         }
         this.setState({ 'nodes': nodes })
       })
